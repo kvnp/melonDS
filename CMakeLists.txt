@@ -37,9 +37,9 @@ endif()
 
 function(detect_architecture symbol arch)
     if (NOT DEFINED ARCHITECTURE)
-        set(CMAKE_REQUIRED_QUIET 1)
+        #set(CMAKE_REQUIRED_QUIET 1)
         check_symbol_exists("${symbol}" "" ARCHITECTURE_${arch})
-        unset(CMAKE_REQUIRED_QUIET)
+        #unset(CMAKE_REQUIRED_QUIET)
 
         # The output variable needs to be unique across invocations otherwise
         # CMake's crazy scope rules will keep it defined

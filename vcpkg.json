@@ -1,0 +1,16 @@
+{
+    "name": "melonds",
+    "version-string": "0.9.5",
+    "dependencies": [
+        "sdl2",
+        "libarchive",
+        "libslirp",
+        "qtbase",
+        "qtsvg",
+        "qtmultimedia",
+        {
+            "name": "dirent",
+            "platform": "windows"
+        }
+    ]
+}
