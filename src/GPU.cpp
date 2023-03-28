@@ -516,10 +516,16 @@ void SetRenderSettings(int renderer, RenderSettings& settings)
 // when reading: values are read from each bank and ORed together
 // when writing: value is written to each bank
 
+#ifdef __GNUC__ 
+    #define ctz(x) __builtin_ctz(x)
+#else // MSVC
+    #define ctz(x) _tzcnt_u32(x)
+#endif
+
 u8* GetUniqueBankPtr(u32 mask, u32 offset)
 {
     if (!mask || (mask & (mask - 1)) != 0) return NULL;
-    int num = __builtin_ctz(mask);
+    int num = ctz(mask);
     return &VRAM[num][offset & VRAMMask[num]];
 }
 
@@ -1230,7 +1236,7 @@ NonStupidBitField<Size/VRAMDirtyGranularity> VRAMTrackingSet<Size, MappingGranul
 
             while (mapping != 0)
             {
-                u32 num = __builtin_ctz(mapping);
+                u32 num = ctz(mapping);
                 mapping &= ~(1 << num);
 
                 // hack for **speed**
@@ -1265,7 +1271,7 @@ NonStupidBitField<Size/VRAMDirtyGranularity> VRAMTrackingSet<Size, MappingGranul
 
     while (banksToBeZeroed != 0)
     {
-        u32 num = __builtin_ctz(banksToBeZeroed);
+        u32 num = ctz(banksToBeZeroed);
         banksToBeZeroed &= ~(1 << num);
         VRAMDirty[num].Clear();
     }

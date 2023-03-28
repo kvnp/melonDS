@@ -7068,8 +7068,8 @@ namespace Catch {
                 double b2 = bias - z1;
                 double a1 = a(b1);
                 double a2 = a(b2);
-                auto lo = (std::max)(cumn(a1), 0);
-                auto hi = (std::min)(cumn(a2), n - 1);
+                auto lo = std::max<int>(cumn(a1), 0);
+                auto hi = std::min<int>(cumn(a2), n - 1);
 
                 return { point, resample[lo], resample[hi], confidence_level };
             }
@@ -7138,7 +7138,7 @@ namespace Catch {
             }
             template <typename Clock>
             EnvironmentEstimate<FloatDuration<Clock>> estimate_clock_cost(FloatDuration<Clock> resolution) {
-                auto time_limit = (std::min)(
+                auto time_limit = std::min<int>(
                     resolution * clock_cost_estimation_tick_limit,
                     FloatDuration<Clock>(clock_cost_estimation_time_limit));
                 auto time_clock = [](int k) {
@@ -7306,7 +7306,7 @@ namespace Catch {
             template <typename Clock>
             ExecutionPlan<FloatDuration<Clock>> prepare(const IConfig &cfg, Environment<FloatDuration<Clock>> env) const {
                 auto min_time = env.clock_resolution.mean * Detail::minimum_ticks;
-                auto run_time = std::max(min_time, std::chrono::duration_cast<decltype(min_time)>(cfg.benchmarkWarmupTime()));
+                auto run_time = std::max<int>(min_time, std::chrono::duration_cast<decltype(min_time)>(cfg.benchmarkWarmupTime()));
                 auto&& test = Detail::run_for_at_least<Clock>(std::chrono::duration_cast<ClockDuration<Clock>>(run_time), 1, fun);
                 int new_iters = static_cast<int>(std::ceil(min_time * test.iterations / test.elapsed));
                 return { new_iters, test.elapsed / test.iterations * new_iters * cfg.benchmarkSamples(), fun, std::chrono::duration_cast<FloatDuration<Clock>>(cfg.benchmarkWarmupTime()), Detail::warmup_iterations };
@@ -7787,7 +7787,7 @@ namespace Catch {
                 double sb = stddev.point;
                 double mn = mean.point / n;
                 double mg_min = mn / 2.;
-                double sg = (std::min)(mg_min / 4., sb / std::sqrt(n));
+                double sg = std::min<int>(mg_min / 4., sb / std::sqrt(n));
                 double sg2 = sg * sg;
                 double sb2 = sb * sb;
 
@@ -7806,7 +7806,7 @@ namespace Catch {
                     return (nc / n) * (sb2 - nc * sg2);
                 };
 
-                return (std::min)(var_out(1), var_out((std::min)(c_max(0.), c_max(mg_min)))) / sb2;
+                return std::min<int>(var_out(1), var_out(std::min<int>(c_max(0.), c_max(mg_min)))) / sb2;
             }
 
             bootstrap_analysis analyse_samples(double confidence_level, int n_resamples, std::vector<double>::iterator first, std::vector<double>::iterator last) {
@@ -9563,9 +9563,9 @@ namespace detail {
             size_t consoleWidth = CATCH_CLARA_CONFIG_CONSOLE_WIDTH;
             size_t optWidth = 0;
             for( auto const &cols : rows )
-                optWidth = (std::max)(optWidth, cols.left.size() + 2);
+                optWidth = std::max<int>(optWidth, cols.left.size() + 2);
 
-            optWidth = (std::min)(optWidth, consoleWidth/2);
+            optWidth = std::min<int>(optWidth, consoleWidth/2);
 
             for( auto const &cols : rows ) {
                 auto row =
@@ -10923,7 +10923,7 @@ namespace Catch {
     FatalConditionHandler::FatalConditionHandler() {
         assert(!altStackMem && "Cannot initialize POSIX signal handler when one already exists");
         if (altStackSize == 0) {
-            altStackSize = std::max(static_cast<size_t>(SIGSTKSZ), minStackSizeForErrors);
+            altStackSize = std::max<int>(static_cast<size_t>(SIGSTKSZ), minStackSizeForErrors);
         }
         altStackMem = new char[altStackSize]();
     }
@@ -11366,7 +11366,7 @@ namespace Catch {
         IReporterRegistry::FactoryMap const& factories = getRegistryHub().getReporterRegistry().getFactories();
         std::size_t maxNameLen = 0;
         for( auto const& factoryKvp : factories )
-            maxNameLen = (std::max)( maxNameLen, factoryKvp.first.size() );
+            maxNameLen = std::max<int>( maxNameLen, factoryKvp.first.size() );
 
         for( auto const& factoryKvp : factories ) {
             Catch::cout()
@@ -11647,7 +11647,7 @@ namespace Floating {
     }
 
     bool WithinRelMatcher::match(double const& matchee) const {
-        const auto relMargin = m_epsilon * (std::max)(std::fabs(matchee), std::fabs(m_target));
+        const auto relMargin = m_epsilon * std::max<int>(std::fabs(matchee), std::fabs(m_target));
         return marginComparison(matchee, m_target,
                                 std::isinf(relMargin)? 0 : relMargin);
     }
@@ -13565,7 +13565,7 @@ namespace Catch {
             // Note that on unices only the lower 8 bits are usually used, clamping
             // the return value to 255 prevents false negative when some multiple
             // of 256 tests has failed
-            return (std::min) (MaxExitCode, (std::max) (totals.error, static_cast<int>(totals.assertions.failed)));
+            return std::min<int> (MaxExitCode, std::max<int> (totals.error, static_cast<int>(totals.assertions.failed)));
         }
 #if !defined(CATCH_CONFIG_DISABLE_EXCEPTIONS)
         catch( std::exception& ex ) {
@@ -13922,7 +13922,7 @@ namespace Catch {
 
     auto StringRef::substr( size_type start, size_type size ) const noexcept -> StringRef {
         if (start < m_size) {
-            return StringRef(m_start + start, (std::min)(m_size - start, size));
+            return StringRef(m_start + start, std::min<int>(m_size - start, size));
         } else {
             return StringRef();
         }

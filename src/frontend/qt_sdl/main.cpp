@@ -1298,12 +1298,12 @@ qreal ScreenPanelGL::devicePixelRatioFromScreen() const
 
 int ScreenPanelGL::scaledWindowWidth() const
 {
-  return std::max(static_cast<int>(std::ceil(static_cast<qreal>(width()) * devicePixelRatioFromScreen())), 1);
+  return std::max<int>(static_cast<int>(std::ceil(static_cast<qreal>(width()) * devicePixelRatioFromScreen())), 1);
 }
 
 int ScreenPanelGL::scaledWindowHeight() const
 {
-  return std::max(static_cast<int>(std::ceil(static_cast<qreal>(height()) * devicePixelRatioFromScreen())), 1);
+  return std::max<int>(static_cast<int>(std::ceil(static_cast<qreal>(height()) * devicePixelRatioFromScreen())), 1);
 }
 
 std::optional<WindowInfo> ScreenPanelGL::getWindowInfo()

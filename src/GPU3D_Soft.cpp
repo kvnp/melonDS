@@ -1037,7 +1037,7 @@ void SoftRenderer::RenderPolygonScanline(RendererPolygon* rp, s32 y)
         if (xcov == 0x3FF) xcov = 0;
     }
 
-    if (!l_filledge) x = std::min(xlimit, xend-r_edgelen+1);
+    if (!l_filledge) x = std::min<int>(xlimit, xend-r_edgelen+1);
     else
     for (; x < xlimit; x++)
     {

@@ -231,7 +231,7 @@ void CartGame::LoadSave(const u8* savedata, u32 savelen)
 {
     if (!SRAM) return;
 
-    u32 len = std::min(savelen, SRAMLength);
+    u32 len = std::min<int>(savelen, SRAMLength);
     memcpy(SRAM, savedata, len);
     Platform::WriteGBASave(savedata, len, 0, len);
 }

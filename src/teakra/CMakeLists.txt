@@ -55,7 +55,7 @@ else()
         -Wall
         -Wextra
         -Wcast-qual
-        -pedantic
+        -pedanticFrt
         -pedantic-errors
         -Wfatal-errors
         -Wno-missing-braces

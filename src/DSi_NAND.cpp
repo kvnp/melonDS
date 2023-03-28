@@ -587,7 +587,7 @@ void PatchUserData()
             // setting up username
             std::string orig_username = Platform::GetConfigString(Platform::Firm_Username);
             std::u16string username = std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t>{}.from_bytes(orig_username);
-            size_t usernameLength = std::min(username.length(), (size_t) 10);
+            size_t usernameLength = std::min<int>(username.length(), (size_t) 10);
             memset(contents + 0xD0, 0, 11 * sizeof(char16_t));
             memcpy(contents + 0xD0, username.data(), usernameLength * sizeof(char16_t));
 
@@ -604,7 +604,7 @@ void PatchUserData()
             // setup message
             std::string orig_message = Platform::GetConfigString(Platform::Firm_Message);
             std::u16string message = std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t>{}.from_bytes(orig_message);
-            size_t messageLength = std::min(message.length(), (size_t) 26);
+            size_t messageLength = std::min<int>(message.length(), (size_t) 26);
             memset(contents + 0xE6, 0, 27 * sizeof(char16_t));
             memcpy(contents + 0xE6, message.data(), messageLength * sizeof(char16_t));
 

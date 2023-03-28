@@ -196,7 +196,7 @@ void SetupScreenLayout(int screenWidth, int screenHeight,
         float hSize = fabsf(refpoints[primOffset][0] - refpoints[primOffset+1][0]);
         float vSize = fabsf(refpoints[primOffset][1] - refpoints[primOffset+1][1]);
 
-        float scale = std::min(screenWidth / hSize, screenHeight / vSize);
+        float scale = std::min<int>(screenWidth / hSize, screenHeight / vSize);
         if (integerScale)
             scale = floorf(scale);
 
@@ -252,10 +252,10 @@ void SetupScreenLayout(int screenWidth, int screenHeight,
 
                 for (int i = 1; i < 4; i++)
                 {
-                    minX = std::min(minX, refpoints[i][0]);
-                    minY = std::min(minY, refpoints[i][1]);
-                    maxX = std::max(maxX, refpoints[i][0]);
-                    maxY = std::max(maxY, refpoints[i][1]);
+                    minX = std::min<int>(minX, refpoints[i][0]);
+                    minY = std::min<int>(minY, refpoints[i][1]);
+                    maxX = std::max<int>(maxX, refpoints[i][0]);
+                    maxY = std::max<int>(maxY, refpoints[i][1]);
                 }
 
                 float hSize = maxX - minX;
@@ -273,7 +273,7 @@ void SetupScreenLayout(int screenWidth, int screenHeight,
                 }
 
                 // scale evenly
-                float scale = std::min(screenWidth / hSize, screenHeight / vSize);
+                float scale = std::min<int>(screenWidth / hSize, screenHeight / vSize);
 
                 if (integerScale)
                     scale = floor(scale);
@@ -331,23 +331,23 @@ void SetupScreenLayout(int screenWidth, int screenHeight,
                 float secMinX = refpoints[secOffset][0], secMaxX = secMinX;
                 float secMinY = refpoints[secOffset][1], secMaxY = secMinY;
 
-                primMinX = std::min(primMinX, refpoints[primOffset+1][0]);
-                primMinY = std::min(primMinY, refpoints[primOffset+1][1]);
-                primMaxX = std::max(primMaxX, refpoints[primOffset+1][0]);
-                primMaxY = std::max(primMaxY, refpoints[primOffset+1][1]);
+                primMinX = std::min<int>(primMinX, refpoints[primOffset+1][0]);
+                primMinY = std::min<int>(primMinY, refpoints[primOffset+1][1]);
+                primMaxX = std::max<int>(primMaxX, refpoints[primOffset+1][0]);
+                primMaxY = std::max<int>(primMaxY, refpoints[primOffset+1][1]);
 
-                secMinX = std::min(secMinX, refpoints[secOffset+1][0]);
-                secMinY = std::min(secMinY, refpoints[secOffset+1][1]);
-                secMaxX = std::max(secMaxX, refpoints[secOffset+1][0]);
-                secMaxY = std::max(secMaxY, refpoints[secOffset+1][1]);
+                secMinX = std::min<int>(secMinX, refpoints[secOffset+1][0]);
+                secMinY = std::min<int>(secMinY, refpoints[secOffset+1][1]);
+                secMaxX = std::max<int>(secMaxX, refpoints[secOffset+1][0]);
+                secMaxY = std::max<int>(secMaxY, refpoints[secOffset+1][1]);
 
-                float primHSize = layout == 1 ? std::max(primMaxX, -primMinX) : primMaxX - primMinX;
-                float primVSize = layout == 0 ? std::max(primMaxY, -primMinY) : primMaxY - primMinY;
+                float primHSize = layout == 1 ? std::max<int>(primMaxX, -primMinX) : primMaxX - primMinX;
+                float primVSize = layout == 0 ? std::max<int>(primMaxY, -primMinY) : primMaxY - primMinY;
 
-                float secHSize = layout == 1 ? std::max(secMaxX, -secMinX) : secMaxX - secMinX;
-                float secVSize = layout == 0 ? std::max(secMaxY, -secMinY) : secMaxY - secMinY;
+                float secHSize = layout == 1 ? std::max<int>(secMaxX, -secMinX) : secMaxX - secMinX;
+                float secVSize = layout == 0 ? std::max<int>(secMaxY, -secMinY) : secMaxY - secMinY;
 
-                float primScale = std::min(screenWidth / primHSize, screenHeight / primVSize);
+                float primScale = std::min<int>(screenWidth / primHSize, screenHeight / primVSize);
                 float secScale = 1.f;
 
                 if (integerScale)
@@ -356,16 +356,16 @@ void SetupScreenLayout(int screenWidth, int screenHeight,
                 if (layout == 0)
                 {
                     if (screenHeight - primVSize * primScale < secVSize)
-                        primScale = std::min(screenWidth / primHSize, (screenHeight - secVSize) / primVSize);
+                        primScale = std::min<int>(screenWidth / primHSize, (screenHeight - secVSize) / primVSize);
                     else
-                        secScale = std::min((screenHeight - primVSize * primScale) / secVSize, screenWidth / secHSize);
+                        secScale = std::min<int>((screenHeight - primVSize * primScale) / secVSize, screenWidth / secHSize);
                 }
                 else
                 {
                     if (screenWidth - primHSize * primScale < secHSize)
-                        primScale = std::min((screenWidth - secHSize) / primHSize, screenHeight / primVSize);
+                        primScale = std::min<int>((screenWidth - secHSize) / primHSize, screenHeight / primVSize);
                     else
-                        secScale = std::min((screenWidth - primHSize * primScale) / secHSize, screenHeight / secVSize);
+                        secScale = std::min<int>((screenWidth - primHSize * primScale) / secHSize, screenHeight / secVSize);
                 }
 
                 if (integerScale)
@@ -398,10 +398,10 @@ void SetupScreenLayout(int screenWidth, int screenHeight,
 
         for (int i = posRefPointOffset + 1; i < posRefPointOffset + posRefPointCount; i++)
         {
-            minX = std::min(minX, refpoints[i][0]);
-            minY = std::min(minY, refpoints[i][1]);
-            maxX = std::max(maxX, refpoints[i][0]);
-            maxY = std::max(maxY, refpoints[i][1]);
+            minX = std::min<int>(minX, refpoints[i][0]);
+            minY = std::min<int>(minY, refpoints[i][1]);
+            maxX = std::max<int>(maxX, refpoints[i][0]);
+            maxY = std::max<int>(maxY, refpoints[i][1]);
         }
 
         float width = maxX - minX;

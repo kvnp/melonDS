@@ -223,7 +223,7 @@ public:
         s32 numD = DataCycles;
 
         //if (DataRegion != CodeRegion)
-            Cycles += std::max(numC + numD - 6, std::max(numC, numD));
+            Cycles += std::max<int>(numC + numD - 6, std::max<int>(numC, numD));
         //else
         //    Cycles += numC + numD;
     }
@@ -235,7 +235,7 @@ public:
         s32 numD = DataCycles;
 
         //if (DataRegion != CodeRegion)
-            Cycles += std::max(numC + numD - 6, std::max(numC, numD));
+            Cycles += std::max<int>(numC + numD - 6, std::max<int>(numC, numD));
         //else
         //    Cycles += numC + numD;
     }
@@ -422,13 +422,13 @@ public:
             else
             {
                 numC++;
-                Cycles += std::max(numC + numD - 3, std::max(numC, numD));
+                Cycles += std::max<int>(numC + numD - 3, std::max<int>(numC, numD));
             }
         }
         else if (CodeRegion == 0x02)
         {
             numD++;
-            Cycles += std::max(numC + numD - 3, std::max(numC, numD));
+            Cycles += std::max<int>(numC + numD - 3, std::max<int>(numC, numD));
         }
         else
         {
@@ -447,11 +447,11 @@ public:
             if (CodeRegion == 0x02)
                 Cycles += numC + numD;
             else
-                Cycles += std::max(numC + numD - 3, std::max(numC, numD));
+                Cycles += std::max<int>(numC + numD - 3, std::max<int>(numC, numD));
         }
         else if (CodeRegion == 0x02)
         {
-            Cycles += std::max(numC + numD - 3, std::max(numC, numD));
+            Cycles += std::max<int>(numC + numD - 3, std::max<int>(numC, numD));
         }
         else
         {

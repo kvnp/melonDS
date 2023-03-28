@@ -928,13 +928,13 @@ void Compiler::Comp_AddCycles_CDI()
             else
             {
                 numC++;
-                cycles = std::max(numC + numD - 3, std::max(numC, numD));
+                cycles = std::max<int>(numC + numD - 3, std::max<int>(numC, numD));
             }
         }
         else if (CodeRegion == 0x02)
         {
             numD++;
-            cycles = std::max(numC + numD - 3, std::max(numC, numD));
+            cycles = std::max<int>(numC + numD - 3, std::max<int>(numC, numD));
         }
         else
         {
@@ -957,7 +957,7 @@ void Compiler::Comp_AddCycles_CD()
         s32 numD = CurInstr.DataCycles;
 
         //if (DataRegion != CodeRegion)
-            cycles = std::max(numC + numD - 6, std::max(numC, numD));
+            cycles = std::max<int>(numC + numD - 6, std::max<int>(numC, numD));
 
         IrregularCycles = cycles != numC;
     }
@@ -971,11 +971,11 @@ void Compiler::Comp_AddCycles_CD()
             if (CodeRegion == 0x02)
                 cycles += numC + numD;
             else
-                cycles += std::max(numC + numD - 3, std::max(numC, numD));
+                cycles += std::max<int>(numC + numD - 3, std::max<int>(numC, numD));
         }
         else if (CodeRegion == 0x02)
         {
-            cycles += std::max(numC + numD - 3, std::max(numC, numD));
+            cycles += std::max<int>(numC + numD - 3, std::max<int>(numC, numD));
         }
         else
         {

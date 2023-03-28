@@ -68,6 +68,27 @@ A million repetitions of "a"
 #endif
 #endif
 
+#if defined(__BYTE_ORDER__) && !defined(BYTE_ORDER)
+#if (__BYTE_ORDER__ == __ORDER_BIG_ENDIAN__)
+    #define BYTE_ORDER BIG_ENDIAN
+#else
+    #define BYTE_ORDER LITTLE_ENDIAN
+#endif
+#endif
+
+#if !defined(BYTE_ORDER)
+#define LITTLE_ENDIAN2 0x41424344UL 
+#define BIG_ENDIAN2    0x44434241UL
+#define PDP_ENDIAN2    0x42414443UL
+#define ENDIAN_ORDER  ('ABCD') 
+
+#if ENDIAN_ORDER==LITTLE_ENDIAN2
+    #define BYTE_ORDER LITTLE_ENDIAN
+#else
+    #define BYTE_ORDER BIG_ENDIAN
+#endif
+#endif
+
 #if !defined(BYTE_ORDER) || \
     (BYTE_ORDER != BIG_ENDIAN && BYTE_ORDER != LITTLE_ENDIAN && \
     BYTE_ORDER != PDP_ENDIAN)

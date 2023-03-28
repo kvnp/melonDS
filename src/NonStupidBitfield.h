@@ -26,6 +26,12 @@
 #include <initializer_list>
 #include <algorithm>
 
+#ifdef __GNUC__ 
+    #define ctzll(x) __builtin_ctzll(x)
+#else // MSVC
+    #define ctzll(x) _tzcnt_u64(x)
+#endif
+
 // like std::bitset but less stupid and optimised for 
 // our use case (keeping track of memory invalidations)
 
@@ -89,7 +95,7 @@ struct NonStupidBitField
             done:;
             }
 
-            BitIdx = __builtin_ctzll(RemainingBits);
+            BitIdx = ctzll(RemainingBits);
             RemainingBits &= ~(1ULL << BitIdx);
 
             if ((Size & 0x3F) && BitIdx >= Size)
@@ -144,7 +150,7 @@ struct NonStupidBitField
     {
         for (u32 i = 0; i < DataLength; i++)
         {
-            u32 idx = __builtin_ctzll(Data[i]);
+            u32 idx = ctzll(Data[i]);
             if (Data[i] && idx + i * 64 < Size)
             {
                 return {*this, i, idx, Data[i] & ~(1ULL << idx)};

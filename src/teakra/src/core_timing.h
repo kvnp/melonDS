@@ -28,7 +28,7 @@ public:
     u64 Skip(u64 maximum) {
         u64 ticks = maximum;
         for (const auto& callbacks : registered_callbacks) {
-            ticks = std::min(ticks, callbacks->GetMaxSkip());
+            ticks = std::min<int>(ticks, callbacks->GetMaxSkip());
         }
         for (const auto& callbacks : registered_callbacks) {
             callbacks->Skip(ticks);

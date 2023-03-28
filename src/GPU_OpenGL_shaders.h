@@ -15,11 +15,12 @@
     You should have received a copy of the GNU General Public License along
     with melonDS. If not, see http://www.gnu.org/licenses/.
 */
+#define MULTI_LINE_STRING(...) #__VA_ARGS__
 
 #ifndef GPU_OPENGL_SHADERS_H
 #define GPU_OPENGL_SHADERS_H
 
-const char* kCompositorVS = R"(#version 140
+const char* kCompositorVS = MULTI_LINE_STRING((#version 140
 
 in vec2 vPosition;
 in vec2 vTexcoord;
@@ -36,9 +37,9 @@ void main()
     gl_Position = fpos;
     fTexcoord = vTexcoord;
 }
-)";
+));
 
-const char* kCompositorFS_Nearest = R"(#version 140
+const char* kCompositorFS_Nearest = MULTI_LINE_STRING((#version 140
 
 uniform uint u3DScale;
 uniform int u3DXPos;
@@ -160,11 +161,11 @@ void main()
 
     oColor = vec4(vec3(pixel.bgr) / 255.0, 1.0);
 }
-)";
+));
 
 
 
-const char* kCompositorFS_Linear = R"(#version 140
+const char* kCompositorFS_Linear = MULTI_LINE_STRING((#version 140
 
 uniform uint u3DScale;
 
@@ -315,7 +316,7 @@ void main()
 
     oColor = vec4(vec3(pixel.bgr) / 255.0, 1.0);
 }
-)";
+));
 
 
 
@@ -324,7 +325,7 @@ void main()
 
 // HUGE TEST ZONE ARRLGD
 
-const char* kCompositorVS_xBRZ = R"(#version 140
+const char* kCompositorVS_xBRZ = MULTI_LINE_STRING((#version 140
 
 #define BLEND_NONE 0
 #define BLEND_NORMAL 1
@@ -403,9 +404,9 @@ void main()
 	t6 = vTexCoord.xyyy + vec4(-2.0*dx,-dy, 0.0, dy);  // A0 D0 G0
 	t7 = vTexCoord.xyyy + vec4( 2.0*dx,-dy, 0.0, dy);  // C4 F4 I4
 }
-)";
+));
 
-const char* kCompositorFS_xBRZ = R"(#version 140
+const char* kCompositorFS_xBRZ = MULTI_LINE_STRING((#version 140
 
 #define BLEND_NONE 0
 #define BLEND_NORMAL 1
@@ -860,7 +861,7 @@ void main()
 
     FragColor = vec4(vec3(pixel.bgr) / 255.0, 1.0);
 }
-)";
+));
 
 
 

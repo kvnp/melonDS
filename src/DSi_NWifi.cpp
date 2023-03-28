@@ -24,6 +24,13 @@
 #include "WifiAP.h"
 #include "Platform.h"
 
+#ifdef __WIN32__
+    #define alloca(x) __builtin_alloca((x))
+#else
+    #include <malloc.h>
+    #define alloca(x)  _alloca(x)
+#endif // __WIN32__
+
 
 const u8 CIS0[256] =
 {
@@ -1042,7 +1049,8 @@ void DSi_NWifi::WMI_Command()
         case 0x000E: // get channel list
             {
                 int nchan = 11; // TODO: customize??
-                u8 reply[2 + (nchan*2) + 2];
+                //u8 reply[2 + (nchan*2) + 2];
+                u8* reply = (u8*) alloca(2 + (nchan*2) + 2);
 
                 reply[0] = 0;
                 reply[1] = nchan;

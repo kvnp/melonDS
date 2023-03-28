@@ -128,9 +128,9 @@ void ByteIn(u8 val)
 
             case 0x20:
                 {
-                    time_t timestamp = time(NULL);
                     struct tm timedata;
-                    localtime_r(&timestamp, &timedata);
+                    time_t timestamp = time(NULL);
+                    localtime_s(&timedata, &timestamp);
 
                     Output[0] = BCD(timedata.tm_year - 100);
                     Output[1] = BCD(timedata.tm_mon + 1);
@@ -144,9 +144,9 @@ void ByteIn(u8 val)
 
             case 0x60:
                 {
-                    time_t timestamp = time(NULL);
                     struct tm timedata;
-                    localtime_r(&timestamp, &timedata);
+                    time_t timestamp = time(NULL);
+                    localtime_s(&timedata, &timestamp);
 
                     Output[0] = BCD(timedata.tm_hour);
                     Output[1] = BCD(timedata.tm_min);

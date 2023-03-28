@@ -22,6 +22,11 @@
 #include "Platform.h"
 
 
+#ifndef __WIN32__
+    #define strncasecmp(x,y,z) _strnicmp(x,y,z)
+#endif // __WIN32__
+
+
 // TODO: import codes from other sources (usrcheat.dat, ...)
 // TODO: more user-friendly error reporting
 

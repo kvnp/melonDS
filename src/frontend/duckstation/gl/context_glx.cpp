@@ -143,7 +143,7 @@ bool ContextGLX::SetSwapInterval(s32 interval)
   }
   else if (GLAD_GLX_MESA_swap_control)
   {
-    return (glXSwapIntervalMESA(static_cast<u32>(std::max(interval, 0))) != 0);
+    return (glXSwapIntervalMESA(static_cast<u32>(std::max<int>(interval, 0))) != 0);
   }
   else if (GLAD_GLX_SGI_swap_control)
   {

@@ -1065,7 +1065,7 @@ u32 RunFrame()
                 // GXFIFO stall
                 s32 cycles = GPU3D::CyclesToRunFor();
 
-                ARM9Timestamp = std::min(ARM9Target, ARM9Timestamp+(cycles<<ARM9ClockShift));
+                ARM9Timestamp = std::min<int>(ARM9Target, ARM9Timestamp+(cycles<<ARM9ClockShift));
             }
             else if (CPUStop & 0x0FFF)
             {

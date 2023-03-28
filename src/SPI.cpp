@@ -300,7 +300,7 @@ void LoadUserSettingsFromConfig()
     // setting up username
     std::string orig_username = Platform::GetConfigString(Platform::Firm_Username);
     std::u16string username = std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t>{}.from_bytes(orig_username);
-    size_t usernameLength = std::min(username.length(), (size_t) 10);
+    size_t usernameLength = std::min<int>(username.length(), (size_t) 10);
     memcpy(Firmware + UserSettings + 0x06, username.data(), usernameLength * sizeof(char16_t));
     Firmware[UserSettings+0x1A] = usernameLength;
 
@@ -317,7 +317,7 @@ void LoadUserSettingsFromConfig()
     // setup message
     std::string orig_message = Platform::GetConfigString(Platform::Firm_Message);
     std::u16string message = std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t>{}.from_bytes(orig_message);
-    size_t messageLength = std::min(message.length(), (size_t) 26);
+    size_t messageLength = std::min<int>(message.length(), (size_t) 26);
     memcpy(Firmware + UserSettings + 0x1C, message.data(), messageLength * sizeof(char16_t));
     Firmware[UserSettings+0x50] = messageLength;
 }

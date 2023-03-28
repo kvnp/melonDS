@@ -486,7 +486,7 @@ void CartRetail::LoadSave(const u8* savedata, u32 savelen)
 {
     if (!SRAM) return;
 
-    u32 len = std::min(savelen, SRAMLength);
+    u32 len = std::min<int>(savelen, SRAMLength);
     memcpy(SRAM, savedata, len);
     Platform::WriteNDSSave(savedata, len, 0, len);
 }
@@ -955,7 +955,7 @@ int CartRetailNAND::ROMCommandStart(u8* cmd, u8* data, u32 len)
             if (SRAMLength) memcpy(&iddata[0x18], &SRAM[SRAMLength - 0x800], 16);
 
             memset(data, 0, len);
-            memcpy(data, iddata, std::min(len, 0x30u));
+            memcpy(data, iddata, std::min<int>(len, 0x30u));
         }
         return 0;
 

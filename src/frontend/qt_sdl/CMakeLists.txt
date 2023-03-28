@@ -97,6 +97,11 @@ if (WIN32)
 
         ../glad/glad_wgl.c
     )
+
+    #if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+    #    message(STATUS "hey")
+    #    find_package(DIRENT REQUIRED)
+    #endif()
 elseif (APPLE)
     if (NOT USE_QT6)
         find_library(COCOA_LIB Cocoa)
@@ -156,7 +161,11 @@ elseif (WIN32)
     target_sources(melonDS PUBLIC "${CMAKE_BINARY_DIR}/res/melon.rc")
     target_include_directories(melonDS PRIVATE "${CMAKE_BINARY_DIR}/res")
 
-    if (${ARCHITECTURE} STREQUAL x86_64)
+    if (NOT DEFINED ARCHITECTURE)
+        set(ARCHITECTURE "${CMAKE_SYSTEM_PROCESSOR}")
+    endif()
+
+    if (${ARCHITECTURE} STREQUAL x86_64 OR ${ARCHITECTURE} STREQUAL AMD64)
         set(WIN32_ARCHITECTURE amd64)
     elseif (${ARCHITECTURE} STREQUAL x86)
         set(WIN32_ARCHITECTURE x86)
