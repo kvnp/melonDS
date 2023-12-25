@@ -24,7 +24,11 @@ jobs:
       VCPKG_DEFAULT_TRIPLET: ${{ matrix.target }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: "https://github.com/microsoft/vcpkg"
+          path: "vcpkg"
       - uses: lukka/get-cmake@latest
       - name: dir
         run: find $RUNNER_WORKSPACE
