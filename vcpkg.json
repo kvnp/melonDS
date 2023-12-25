@@ -5,9 +5,10 @@
         "sdl2",
         "libarchive",
         "libslirp",
-        "qt5-base",
-        "qt5-svg",
-        "qt5-multimedia",
+        "qtbase",
+        "qtsvg",
+        "qtmultimedia",
+        "qttools",
         "dirent"
     ]
 }
