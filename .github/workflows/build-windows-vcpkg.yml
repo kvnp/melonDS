@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [x64-windows-static, arm64-windows-static]
+        target: [x64-mingw-static, arm64-mingw-static]
 
     env:
       VCPKG_DEFAULT_TRIPLET: ${{ matrix.target }}
