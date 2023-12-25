@@ -8,9 +8,9 @@
             "name": "libslirp",
             "platform": "mingw"
         },
-        "qtbase",
-        "qtsvg",
-        "qtmultimedia",
+        "qt5-base",
+        "qt5-svg",
+        "qt5-multimedia",
         {
             "name": "dirent",
             "platform": "windows"
