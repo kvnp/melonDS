@@ -35,7 +35,7 @@ jobs:
         run: |
           cd vcpkg
           echo "GIT_COMMIT=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
-          
+
           echo 'diff --git a/ports/libslirp/portfile.cmake b/ports/libslirp/portfile.cmake' | tee -a libslirp-update.patch
           echo 'index 0bd6e252c..756e4b9b8 100644' | tee -a libslirp-update.patch
           echo '--- a/ports/libslirp/portfile.cmake' | tee -a libslirp-update.patch
@@ -47,7 +47,7 @@ jobs:
           echo '-    REF v4.7.0' | tee -a libslirp-update.patch
           echo '-    SHA512 387f4a6dad240ce633df2640bb49c6cb0041c8b3afc8d0ef38186d385f00dd9e4ef4443e93e1b71dbf05e22892b6f2771a87a202e815d8ec899ab5c147a1f09f' | tee -a libslirp-update.patch
           echo '+    REF 129077f9870426d1b7b3a8239d8b5a50bee017b4' | tee -a libslirp-update.patch
-          echo '+    SHA512 0' | tee -a libslirp-update.patch
+          echo '+    SHA512 8223352cf09154a857960b852c9b1a8a01ab0c86c3cc873fc37da337174c59b68b50939cffc018c91f320000da09ce833acf966a3492de1453bc7196d14c1198' | tee -a libslirp-update.patch
           echo '     HEAD_REF master' | tee -a libslirp-update.patch
           echo ' )' | tee -a libslirp-update.patch
           echo '' | tee -a libslirp-update.patch
