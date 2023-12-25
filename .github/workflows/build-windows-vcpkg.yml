@@ -1,5 +1,6 @@
-name: CMake Build (Windows)
+name: CMake Build (Windows VCPKG)
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
