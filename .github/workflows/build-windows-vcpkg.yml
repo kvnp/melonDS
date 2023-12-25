@@ -13,12 +13,12 @@ env:
 
 jobs:
   build:
-    name: ${{ matrix.os }}-${{ github.workflow }}
+    name: ${{ matrix.target }}-${{ github.workflow }}
     runs-on: windows-latest
     strategy:
       fail-fast: false
       matrix:
-        target: [x64-windows, arm64-windows]
+        target: [x64-windows-static, arm64-windows-static]
 
     env:
       VCPKG_DEFAULT_TRIPLET: ${{ matrix.target }}
