@@ -30,6 +30,7 @@ jobs:
           repository: "microsoft/vcpkg"
           path: "vcpkg"
       - name: Retrieve version
+        shell: "bash"
         run: |
           echo "GIT_COMMIT=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
         id: version
