@@ -4,7 +4,10 @@
     "dependencies": [
         "sdl2",
         "libarchive",
-        "libslirp",
+        {
+            "name": "libslirp",
+            "platform": "mingw"
+        },
         "qtbase",
         "qtsvg",
         "qtmultimedia",
