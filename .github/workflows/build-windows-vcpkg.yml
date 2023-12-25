@@ -32,6 +32,7 @@ jobs:
       - name: Retrieve version
         shell: "bash"
         run: |
+          cd vcpkg
           echo "GIT_COMMIT=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
         id: version
         
